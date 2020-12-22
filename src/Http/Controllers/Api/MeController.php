@@ -20,12 +20,12 @@ class MeController
 
         $me = Auth::user();
 
-        if($with) {
+        if ($with) {
             $me->load($with);
         }
 
         $resource = config('me.resource');
+
         return new $resource($me);
     }
-
 }

@@ -28,4 +28,3 @@ class Post extends Model
         return PostFactory::new();
     }
 }
-
