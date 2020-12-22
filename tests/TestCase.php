@@ -1,10 +1,10 @@
 <?php
 
-namespace Spatie\Skeleton\Tests;
+namespace Angeloo\Me\Tests;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use Spatie\Skeleton\SkeletonServiceProvider;
+use Angeloo\Me\MeServiceProvider;
+use Illuminate\Support\Facades\Route;
 
 class TestCase extends Orchestra
 {
@@ -12,30 +12,54 @@ class TestCase extends Orchestra
     {
         parent::setUp();
 
-        Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'Spatie\\Skeleton\\Database\\Factories\\'.class_basename($modelName).'Factory'
-        );
+        $this->loadLaravelMigrations();
+        $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
+
+        $this->withFactories(__DIR__.'/database/factories');
+
+        Route::meApi('');
     }
 
     protected function getPackageProviders($app)
     {
         return [
-            SkeletonServiceProvider::class,
+            MeServiceProvider::class,
         ];
     }
 
     public function getEnvironmentSetUp($app)
     {
-        $app['config']->set('database.default', 'sqlite');
-        $app['config']->set('database.connections.sqlite', [
+        $app['config']->set('app.debug', true);
+        $app['config']->set('database.default', 'testbench');
+        $app['config']->set('database.connections.testbench', [
             'driver' => 'sqlite',
             'database' => ':memory:',
             'prefix' => '',
         ]);
-
-        /*
-        include_once __DIR__.'/../database/migrations/create_skeleton_table.php.stub';
-        (new \CreatePackageTable())->up();
-        */
     }
+
+    // /**
+    //  * Define environment setup.
+    //  *
+    //  * @param  \Illuminate\Foundation\Application  $app
+    //  *
+    //  * @return void
+    //  */
+    // protected function defineEnvironment($app)
+    // {
+    //     $app['config']->set('database.default', 'testing');
+    // }
+
+    // /**
+    //  * Define database migrations.
+    //  *
+    //  * @return void
+    //  */
+    // protected function defineDatabaseMigrations()
+    // {
+    //     $this->loadLaravelMigrations([
+    //         '--database' => 'testing',
+    //         '--realpath' => realpath(__DIR__.'/database/migrations'),
+    //     ]);
+    // }
 }
