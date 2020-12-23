@@ -2,7 +2,6 @@
 
 namespace Angeloo\Me\Tests\Feature\Http\Controllers\Api;
 
-use Angeloo\Me\Http\Resources\PostResource;
 use Angeloo\Me\Tests\Http\Resources\MeResource;
 use Angeloo\Me\Tests\Models\User;
 use Angeloo\Me\Tests\TestCase;
@@ -27,6 +26,5 @@ class MeControllerTest extends TestCase
             ->assertOk();
 
         $this->assertSame(json_decode($resource->response()->getContent(), true), $response->json());
-
     }
 }

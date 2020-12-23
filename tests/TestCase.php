@@ -2,9 +2,9 @@
 
 namespace Angeloo\Me\Tests;
 
-use Orchestra\Testbench\TestCase as Orchestra;
 use Angeloo\Me\MeServiceProvider;
 use Illuminate\Support\Facades\Route;
+use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra
 {

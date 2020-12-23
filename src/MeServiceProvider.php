@@ -2,9 +2,9 @@
 
 namespace Angeloo\Me;
 
-use Illuminate\Support\ServiceProvider;
 use Angeloo\Me\Http\Controllers\Api\MeController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\ServiceProvider;
 
 class MeServiceProvider extends ServiceProvider
 {
