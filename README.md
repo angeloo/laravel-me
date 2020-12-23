@@ -5,15 +5,8 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/angeloo/laravel-me.svg?style=flat-square)](https://packagist.org/packages/angeloo/laravel-me)
 
 
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
+Simple Laravel package to get an endpoint that return the current user data 
 
-## Support us
-
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/package-laravel-me-laravel.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/package-laravel-me-laravel)
-
-We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
-
-We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using. You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards on [our virtual postcard wall](https://spatie.be/open-source/postcards).
 
 ## Installation
 
@@ -25,11 +18,6 @@ composer require angeloo/laravel-me
 
 You can publish and run the migrations with:
 
-```bash
-php artisan vendor:publish --provider="Angeloo\Me\MeServiceProvider" --tag="migrations"
-php artisan migrate
-```
-
 You can publish the config file with:
 ```bash
 php artisan vendor:publish --provider="Angeloo\Me\MeServiceProvider" --tag="config"
@@ -39,14 +27,24 @@ This is the contents of the published config file:
 
 ```php
 return [
+    /*
+     * The eloquent resource to use for the response.
+     */
+    'resource' => \Angeloo\Me\Http\Resources\MeResource::class,
+
+    /*
+     * The user's relationships you want to load.
+     */
+    'with' => []
 ];
 ```
 
 ## Usage
 
 ``` php
-$laravel-me = new Angeloo\Me();
-echo $laravel-me->echoPhrase('Hello, Angeloo!');
+// in a routes files behind auth gate
+
+Route::meApi('me');
 ```
 
 ## Testing
@@ -65,7 +63,7 @@ Please see [CONTRIBUTING](.github/CONTRIBUTING.md) for details.
 
 ## Security Vulnerabilities
 
-Please review [our security policy](../../security/policy) on how to report security vulnerabilities.
+If you discover any security related issues, please email angelo.maiorano@gmail.com instead of using the issue tracker.
 
 ## Credits
 

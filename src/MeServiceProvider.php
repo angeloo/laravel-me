@@ -35,7 +35,7 @@ class MeServiceProvider extends ServiceProvider
     {
         Route::macro('meApi', function (string $prefix) {
             Route::prefix($prefix)->group(function () {
-                Route::get('/me', MeController::class);
+                Route::get('/', MeController::class);
             });
         });
 
